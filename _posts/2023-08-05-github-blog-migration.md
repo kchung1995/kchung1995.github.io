@@ -1,5 +1,6 @@
 ---
 categories: posts
+data: 2023-08-05 06:00
 tags: [생각, 블로그]
 ---
 
