@@ -1,5 +1,4 @@
 ---
-layout: post
 tags: [생각, 블로그]
 ---
 
@@ -11,7 +10,7 @@ tags: [생각, 블로그]
 
 옮기게 된 계기와 장단점, 그리고 간단한 과정을 소개하려고 합니다.
 
-![img](/Users/katfun/gitRepo/kchung1995.github.io/assets/images/posts/github-blog-migration/tistory-main.png)
+![img](/assets/images/posts/github-blog-migration/tistory-main.png)
 
 ## 1. 발단
 
@@ -38,7 +37,7 @@ tags: [생각, 블로그]
 
 이것이 알고리즘 문제풀이 글을 올릴 때는 괜찮았는데 (코드 한 덩어리만 올리면 되니까), 기술 얘기를 쓰면서 점차 코드의 양이 많아지고, 코드의 가독성이 더 중요해지다 보니 문제점으로 드러나기 시작했습니다.
 
-<img src="/Users/katfun/gitRepo/kchung1995.github.io/assets/images/posts/github-blog-migration/tistory-code-block.png" alt="img" style="zoom:50%;" />
+<img src="/assets/images/posts/github-blog-migration/tistory-code-block.png" alt="img" style="zoom:50%;" />
 
 티스토리 시절의 코드 블록입니다. 읽기 편하셨나요?
 
@@ -162,7 +161,7 @@ fi
 
 Git Hooks 설정은 아래와 같습니다. (블로그 repository 디렉토리에서 시도해 주세요.)
 
-``` she
+```shell
 $ vim .git/hooks/pre-commit
 
 >> bash newblogpost.sh
