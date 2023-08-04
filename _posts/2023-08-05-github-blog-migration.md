@@ -1,5 +1,5 @@
 ---
-categories: blog
+categories: posts
 tags: [생각, 블로그]
 ---
 
