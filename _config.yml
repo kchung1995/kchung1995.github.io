@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "카펀"
   avatar           : "/assets/profile.png"
-  bio              : "즐겁게 개발하고 있습니다."
+  bio              : "즐겁게 개발하며 지냅니다."
   location         : "Seoul, Korea"
   email            : "kchung1995@gmail.com"
   links:
@@ -284,6 +284,7 @@ defaults:
       path: ""
       type: posts
     values:
+      permalink: /posts/:title
       layout: single
       author_profile: true
       read_time: true
