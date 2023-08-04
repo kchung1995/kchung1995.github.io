@@ -1,4 +1,5 @@
 ---
+categories: blog
 tags: [생각, 블로그]
 ---
 
