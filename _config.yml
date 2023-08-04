@@ -279,7 +279,6 @@ compress_html:
 
 # Defaults
 defaults:
-  classes: wide
   # _posts
   - scope:
       path: ""
