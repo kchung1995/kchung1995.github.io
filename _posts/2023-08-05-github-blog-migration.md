@@ -109,26 +109,15 @@ data class GitHubBlog(
 
 이를 그대로 적용하면, 실제 블로그의 URL은 `https://someone.github.io/title`이 됩니다. 저는 이게 마음에 안 들었습니다. url 답게, 글은 title 앞에 `/posts`를 붙이고 싶었습니다.
 
-요 부분 역시 config에서 설정할 수 있습니다.
+요 부분은 글을 작성할 때 카테고리를 지정해 주면, `permalink: /:categories/:title`에 따라 적용됩니다.
 
 ```yaml
-# Defaults
-defaults:
-  # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      permalink: /posts/:title
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: # true
-      share: # true
-      related: true
+---
+categories: posts
+---
 ```
 
-기본적으로 작성되어 있는 `defaults.values` 아래에 `permalink` 값을 추가하였습니다. 따라서 posts 내의 글들은 제목 앞에 `/posts/`를 가지게 됩니다.
+이렇게 글에 따라 카테고리를 설정하면, 해당 카테고리 내의 글들은 제목 앞에 `/posts/`를 가지게 됩니다.
 
 ### Markdown 글 네이밍 컨벤션
 
@@ -175,9 +164,13 @@ $ chmod 777 .git/hooks/pre-commit
 
 그 증거로 여러분은 지금 이 글을 보고 계십니다! ㅎㅎ
 
+다만 git에서 기존 파일이 삭제되고 신규 파일이 추가된 것으로 인식을 해서... 요건 조만간 또 수정을 해야겠네요 ㅎㅎ
+
 ## 3. 결과
 
 그래서 짜잔! 이렇게 새 블로그에 새 글이 작성되었습니다.
+
+아직 수정하고 추가할 부분이 많지만 (검색이라던가... 레이아웃이라던가... 태그 모아보기라던가... 카카오페이 후원이라던가(?)) 천천히 해보려고 합니다.
 
 앞으로는 이곳에서 더욱 양질의 글을 작성하도록 하겠습니다.
 
