@@ -37,7 +37,7 @@ comments:
     category_name        : "Announcements"
     category_id          : "DIC_kwDOKDFASs4CYtVC"
     reactions_enabled    : "1"
-    theme                : "preferred_color_scheme"
+    theme                : "light"
 reCaptcha:
   siteKey                :
   secret                 :
