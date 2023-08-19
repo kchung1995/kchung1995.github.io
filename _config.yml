@@ -31,11 +31,17 @@ masthead_title           : # overrides the website title displayed in the masthe
 breadcrumbs              : true # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : utterances # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
+  provider               : giscus # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
   utterances:
     theme                : "github-light" # (default), "github-dark"
     issue_term           : "pathname" # (default)
     label                : "comment"
+  giscus:
+    repo_id              : "R_kgDOKDFASg"
+    category_name        : "Announcements"
+    category_id          : "DIC_kwDOKDFASs4CYtVC"
+    reactions_enabled    : "1"
+    theme                : "preferred_color_scheme"
 reCaptcha:
   siteKey                :
   secret                 :
