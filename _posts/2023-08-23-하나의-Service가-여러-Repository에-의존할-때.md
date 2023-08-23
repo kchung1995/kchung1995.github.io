@@ -37,7 +37,7 @@ tags: [디자인 패턴, 스프링, 회사일 하다가]
 
 이번 코드도 마찬가지였다. 약 2년 이상의 시간이 지나면서, 이미 팀을 떠난 분들을 포함해서 많은 개발자가 거쳐 간 코드는 테스트하기 어려운 코드가 되어 있었다. 어쩐지 테스트 코드가 없다 싶더니, 딱 봐도 테스트하기 어려우니까 테스트 코드가 없을 법하다.
 
-그런데 여기서 말한 '책임이 몰려 있는 코드'란 구체적으로 어떤 말일까?
+그런데 방금 말한 '책임이 몰려 있는 코드'란 구체적으로 어떤 코드일까?
 
 ### Example
 
@@ -64,14 +64,14 @@ class SomethingService(
 
 어떤 서비스 `SomethingService`가 있다. 이 서비스는 4개의 repository와 하나의 Api client에 의존하고 있다.
 
-생각보다 읽고 계신 여러분들도 자주 접할 코드 같다. Spring 처음 배울 때 Controller-Service-Repository로 이어지는 구조를 만들어 놓고, 프로젝트를 하다 DB 테이블이 늘어나다 보면 자연스럽게 repository를 하나 둘 추가해 갔을 테니까. ~~나도 알고 싶지 않았다~~
+생각보다 읽고 계신 여러분들도 자주 접할 형태의 service 같다. Spring을 처음 배울 때 Controller-Service-Repository로 이어지는 구조를 만들어 놓고, 프로젝트를 하다 DB 테이블이 늘어나다 보면 자연스럽게 repository를 하나 둘 추가해 갔을 테니까. ~~나도 알고 싶지 않았다.~~
 
 이 코드가 왜 문제일까?
 
-`sometingActiveUsers` 메소드를 테스트해 보자.
+`somethingActiveUsers` 메소드를 테스트해 보자.
 
 ```kotlin
-internal class SometingServiceTest() {
+internal class SomethingServiceTest() {
 
   private val service = SomethingService(//... 어? )
   
@@ -84,7 +84,7 @@ internal class SometingServiceTest() {
 
 문제점이 보이는가? `somethingActiveUsers`를 테스트하려고 하면, `SomethingService`가 의존 중인 모든 repository를 채워 넣어 줘야 한다. 심지어 `somethingActiveUsers`는  `somethingUserRepository`하나밖에 쓰지 않는다.
 
-Mocking하면 되지 않을까? 하기엔 내용이 너무 많고, 불필요한 메소드까지 죄다 모킹해야 한다. 심지어 매 테스트마다 특정 메소드이 모킹값이 다르다면, 그것도 일일히 모킹해 줘야 한다.
+Mocking하면 되지 않을까? 하기엔 내용이 너무 많고, 불필요한 메소드까지 죄다 모킹해야 한다. 심지어 매 테스트마다 특정 메소드이 모킹값이 다르다면, 그것도 일일히 모킹해 줘야 한다. 즉, 테스트는 가능하지만, 테스트하기 너무 어렵다.
 
 ### 책임의 모호함
 
@@ -192,7 +192,7 @@ class SomethingService(
 그리고 테스트는 아래와 같이 작성할 수 있다.
 
 ```kotlin
-internal class SometingServiceTest() {
+internal class SomethingServiceTest() {
 
   private val client = TestSomethingClient()
   private val service = SomethingService(client)
