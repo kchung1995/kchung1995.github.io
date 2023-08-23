@@ -242,7 +242,7 @@ Facade (퍼사드) 패턴이라는게 있다. ([위키피디아 링크](https://
 
 이 패턴 이름을 접한 건 개발바닥 2사로 오픈톡방이었다. 공교롭게도 [종현님](https://kim-jong-hyun.tistory.com/) 역시 비슷한 경우에 리팩토링을 진행 중이셨는데, 톡방 염탐하다가 주워듣게 되었다.
 
-![img](/assets/images/posts/하나의-Service가-여러-Repository에-의존할-때)
+![img](/assets/images/posts/하나의-Service가-여러-Repository에-의존할-때/talk.jpeg)
 
 **눈빛 애교 어피치**가 종현님이다.
 
