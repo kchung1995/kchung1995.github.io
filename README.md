@@ -28,4 +28,4 @@
 
 ## Thank you!
 
-[블로그](kchung1995.github.io)를 찾아 주셔서 감사합니다. 심지어 GitHub의 repository까지 찾아와 주셔서 감사합니다.
+[블로그](https://kchung1995.github.io)를 찾아 주셔서 감사합니다. 심지어 GitHub의 repository까지 찾아와 주셔서 감사합니다.
