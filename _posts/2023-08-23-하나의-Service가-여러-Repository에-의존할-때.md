@@ -161,7 +161,7 @@ class SomethingClient(
   private val somethingVendorRepository,
   private val somethingUserRepository,
   private val somethingExternalApiClient
-) : ClaimCompanyRepository {
+) : SomethingRepository {
     fun findAllUsersByStatus(status: String): Users {
       return Users(
         somethingUserRepository.findByStatus(status).filter { it.isActive }
