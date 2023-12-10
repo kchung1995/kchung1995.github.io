@@ -100,7 +100,7 @@ class SomethingService(
 이 때, 아래 3개의 조건을 테스트해 보려고 한다.
 
 * `isDisplay`가 false인 값은 필터링된다.
-* ` validEndDate`가 오늘 날짜 이전이면, 만료된 것으로 간주한다. `isExpired`가 true인 값은 필터링된다.
+* `validEndDate`가 오늘 날짜 이전이면, 만료된 것으로 간주한다. `isExpired`가 true인 값은 필터링된다.
 * response list는 `validEndDate`를 기준으로 오름차순 정렬된다.
 
 따라서 우리가 신경 써야 하는 값들은 `isDisplay`, `validEndDate` 뿐이다. 다른 값들은 적어도 이 테스트들에서는 무관하다.
