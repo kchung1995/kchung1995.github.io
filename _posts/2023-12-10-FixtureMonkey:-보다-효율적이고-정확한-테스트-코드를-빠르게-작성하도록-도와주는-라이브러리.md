@@ -248,7 +248,7 @@ fun `responses are sorted ascending by validEndDate`() {
 * `somethingDataType`, `anotherDataType`은 `enum` 필드이므로, 각 enum entry 중 무작위 값이다.
 * `String`형 필드들에는 정말 무작위의 문자열이 들어간다.
 
-![img](/assets/images/posts/2023-12-10-FixtureMonkey-보다-효율적이고-정확한-테스트-코드를-빠르게-작성하도록-도와주는-라이브러리/debugt.png)
+![img](/assets/images/posts/2023-12-10-FixtureMonkey-보다-효율적이고-정확한-테스트-코드를-빠르게-작성하도록-도와주는-라이브러리/debug.png)
 
 이에 따라, 앞서 언급한 "더 꼼꼼히 엣지 케이스를 찾을 수 있다."가 이루어진다. 테스트 객체를 개발자가 직접 하나씩 작성하다 보면, 고려하지 않은 경우를 만들지 않게 되는 경우가 있다. 위의 예시처럼 list 형태로 만들어 버리면, list 내의 객체가 모두 비슷한 패턴을 가지고 만들어지며, 이는 특정 엣지 케이스가 누락되기 쉬운 환경이 된다.
 
