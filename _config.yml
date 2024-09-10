@@ -87,7 +87,7 @@ analytics:
 # Site Author
 author:
   name             : "카펀"
-  avatar           : "/assets/profile.png"
+  avatar           : "/assets/profile.jpeg"
   bio              : "즐겁게 개발하며 지냅니다."
   location         : "Seoul, Korea"
   email            : "kchung1995@gmail.com"
