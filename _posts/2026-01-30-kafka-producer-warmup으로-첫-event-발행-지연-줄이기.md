@@ -367,9 +367,9 @@ private Future<RecordMetadata> doSend(ProducerRecord<K, V> record, Callback call
 
 많은 서비스들이 무중단 배포가 가능하다고 말한다. 그만큼 배포를 더 작게, 자주 진행할 수 있다는 장점이 있지만, cold start와 같은 단점 역시 수반된다. 완벽하게 개선하지 못하더라도, SW 엔지니어로서 인지하고 개선할 수 있는 부분은 개선해야 한다. kafka는 특히 MSA 환경에서 많이 사용되는 만큼, producer의 warmup을 한 번 고려해 보자.
 
-예제에 활용한 코드는 Claude Code와 함께 만들었다. 이번처럼 어떤 성능 개선 케이스를 소개하는 경우 이를 실제로 돌려볼 수 있는 예제 코드가 있으면 좋겠다고 생각하는데, AI를 활용해서 이를 더 완성도 있게 만들 수 있어 만족스럽다.
+[예제에 활용한 코드](https://github.com/kchung1995/kafka-warmup-example)는 Claude Code와 함께 만들었다. 이번처럼 어떤 성능 개선 케이스를 소개하는 경우 이를 실제로 돌려볼 수 있는 예제 코드가 있으면 좋겠다고 생각하는데, AI를 활용해서 이를 더 완성도 있게 만들 수 있어 만족스럽다.
 
 ## References
 
-* https://stackoverflow.com/questions/64228639/why-kafka-producer-is-very-slow-on-first-message
+* Stack Overflow- [Why kafka producer is very slow on first message?](https://stackoverflow.com/questions/64228639/why-kafka-producer-is-very-slow-on-first-message)
 
