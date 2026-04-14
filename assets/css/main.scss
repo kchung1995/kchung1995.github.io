@@ -18,15 +18,44 @@ html {
   font-size: 100%; // ~16px at browser default; scales with user's browser font setting
 
   @include breakpoint($medium) {
-    font-size: 106.25%;
+    font-size: 100%;
   }
 
   @include breakpoint($large) {
-    font-size: 112.5%;
+    font-size: 100%;
   }
 
   @include breakpoint($x-large) {
-    font-size: 125%;
+    font-size: 106.25%;
+  }
+}
+
+// On mobile, convert author profile to flexbox so Follow button aligns right
+@media screen and (max-width: 1023px) {
+  .h-card {
+    display: flex;
+    align-items: center;
+  }
+
+  .author__avatar {
+    display: block;
+    flex-shrink: 0;
+    width: auto;
+    height: auto;
+
+    img {
+      max-width: 60px;
+    }
+  }
+
+  .author__content {
+    display: block;
+    flex: 1;
+  }
+
+  .author__urls-wrapper {
+    display: block;
+    flex-shrink: 0;
   }
 }
 
