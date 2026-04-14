@@ -13,20 +13,20 @@ $type-size-4-5: 1.12em !default; // Ubuntu Mono is a bit small
 
 @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic|Ubuntu+Mono);
 
-// https://github.com/mmistakes/minimal-mistakes/issues/1219
+// Font sizes as percentages so they scale with the user's browser font setting
 html {
-  font-size: 12px; // change to whatever
-  
+  font-size: 112.5%; // ~18px at browser default 16px
+
   @include breakpoint($medium) {
-    font-size: 14px; // change to whatever
+    font-size: 112.5%;
   }
 
   @include breakpoint($large) {
-    font-size: 16px; // change to whatever
+    font-size: 125%;
   }
 
   @include breakpoint($x-large) {
-    font-size: 18px; // change to whatever
+    font-size: 137.5%;
   }
 }
 
