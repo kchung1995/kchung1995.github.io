@@ -236,6 +236,9 @@ jekyll-archives:
     tag: /tags/:name/
 
 
+after_footer_scripts:
+  - /assets/js/copy-code.js
+
 # HTML Compression
 # - https://jch.penibelst.de/
 compress_html:

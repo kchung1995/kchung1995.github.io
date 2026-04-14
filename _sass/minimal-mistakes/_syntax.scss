@@ -18,6 +18,29 @@ figure.highlight {
     margin: 0;
     padding: 1em;
   }
+
+  .copy-code-btn {
+    position: absolute;
+    top: 0.4em;
+    right: 0.4em;
+    padding: 0.25em 0.5em;
+    background: rgba(255, 255, 255, 0.1);
+    color: $base05;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $border-radius;
+    font-size: 0.75em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &:hover .copy-code-btn {
+    opacity: 1;
+  }
 }
 
 .highlight table {
