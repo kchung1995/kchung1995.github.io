@@ -15,18 +15,18 @@ $type-size-4-5: 1.12em !default; // Ubuntu Mono is a bit small
 
 // Font sizes as percentages so they scale with the user's browser font setting
 html {
-  font-size: 112.5%; // ~18px at browser default 16px
+  font-size: 100%; // ~16px at browser default; scales with user's browser font setting
 
   @include breakpoint($medium) {
-    font-size: 112.5%;
+    font-size: 106.25%;
   }
 
   @include breakpoint($large) {
-    font-size: 125%;
+    font-size: 112.5%;
   }
 
   @include breakpoint($x-large) {
-    font-size: 137.5%;
+    font-size: 125%;
   }
 }
 
