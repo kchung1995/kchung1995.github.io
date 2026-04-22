@@ -46,9 +46,9 @@ layout: default
           </div>
         </div>
 
-        {% if page.image or page.header.teaser %}
+        {% if page.header.image %}
           <div class="post-cover">
-            <img src="{{ page.image | default: page.header.teaser | relative_url }}" alt="{{ page.title | escape }}">
+            <img src="{{ page.header.image | relative_url }}" alt="{{ page.title | escape }}">
           </div>
         {% endif %}
 

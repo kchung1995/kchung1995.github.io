@@ -1,18 +1,28 @@
 (function () {
   if (!document.querySelector('.post-body')) return;
 
-  var blocks = document.querySelectorAll(
-    '.post-body div.highlighter-rouge, .post-body figure.highlight, .post-body div.highlight'
+  var blocks = Array.prototype.filter.call(
+    document.querySelectorAll('.post-body div.highlighter-rouge, .post-body figure.highlight, .post-body div.highlight'),
+    function (block) {
+      if (block.tagName.toLowerCase() !== 'div' && block.tagName.toLowerCase() !== 'figure') return false;
+
+      // Rouge often nests div.highlight inside div.highlighter-rouge.
+      // Only decorate the outermost wrapper so a block gets one header.
+      var outerWrapper = block.parentElement && block.parentElement.closest('div.highlighter-rouge, figure.highlight');
+      if (outerWrapper) return false;
+
+      return true;
+    }
   );
 
   blocks.forEach(function (block) {
     if (block.querySelector(':scope > .code-block-header')) return;
-    if (block.tagName.toLowerCase() !== 'div' && block.tagName.toLowerCase() !== 'figure') return;
 
     // Figure out the language from class name: language-xxx or highlight-xxx
     var lang = '';
-    var m = block.className.match(/language-([^\s]+)/);
+    var m = block.className.match(/(?:language|highlight)-([^\s]+)/);
     if (m) lang = m[1];
+
     if (!lang) {
       var inner = block.querySelector('[class*="language-"]');
       if (inner) {
@@ -20,7 +30,14 @@
         if (im) lang = im[1];
       }
     }
-    if (!lang) lang = 'CODE';
+    if (!lang) {
+      var codeEl = block.querySelector('code');
+      if (codeEl) {
+        var cm = codeEl.className.match(/(?:language|highlight)-([^\s]+)/);
+        if (cm) lang = cm[1];
+      }
+    }
+    if (lang) lang = lang.toUpperCase();
 
     var header = document.createElement('div');
     header.className = 'code-block-header';
