@@ -6,8 +6,9 @@
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem('blog-ui');
-          var dark = saved ? (JSON.parse(saved).dark === true) : false;
+          var saved = JSON.parse(localStorage.getItem('blog-ui') || '{}');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var dark = saved.theme ? saved.theme === 'dark' : prefersDark;
           if (dark) document.documentElement.classList.add('dark');
         } catch (e) {}
       })();
