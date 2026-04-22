@@ -1,0 +1,14 @@
+{% assign nav_page = page.nav_page | default: 'home' %}
+<nav class="mobile-tabs" aria-label="모바일 하단 탭">
+  <div class="mobile-tabs-inner">
+    <a class="mobile-tab{% if nav_page == 'home' %} active{% endif %}" href="{{ '/' | relative_url }}">
+      <span class="tab-icon">🏠</span><span>홈</span>
+    </a>
+    <a class="mobile-tab{% if nav_page == 'search' %} active{% endif %}" href="{{ '/search/' | relative_url }}">
+      <span class="tab-icon">🔍</span><span>검색</span>
+    </a>
+    <a class="mobile-tab{% if nav_page == 'tags' %} active{% endif %}" href="{{ '/tags/' | relative_url }}">
+      <span class="tab-icon">🏷️</span><span>태그</span>
+    </a>
+  </div>
+</nav>

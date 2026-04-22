@@ -1,10 +1,7 @@
 ---
-layout: archive
+layout: default
+nav_page: home
 ---
-
-{{ content }}
-
-<h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
 
 {% if paginator %}
   {% assign posts = paginator.posts %}
@@ -12,11 +9,36 @@ layout: archive
   {% assign posts = site.posts %}
 {% endif %}
 
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-<div class="entries-{{ entries_layout }}">
-  {% for post in posts %}
-    {% include archive-single.html type=entries_layout %}
-  {% endfor %}
-</div>
+<div class="container">
+  <div class="main-grid">
+    <div>
+      <div class="section-header">
+        <h1 class="section-title">최근 포스트</h1>
+      </div>
+      <div class="post-list">
+        {% for post in posts %}
+          {% include post-card.html post=post %}
+        {% endfor %}
+        {% if posts.size == 0 %}
+          <p class="empty-state">아직 포스트가 없습니다.</p>
+        {% endif %}
+      </div>
 
-{% include paginator.html %}
+      {% if paginator and paginator.total_pages > 1 %}
+        <nav class="pagination" style="margin-top:28px;display:flex;gap:10px;justify-content:center;">
+          {% if paginator.previous_page %}
+            <a class="tag-btn" href="{{ paginator.previous_page_path | relative_url }}">← 이전</a>
+          {% endif %}
+          <span class="tag-btn" style="pointer-events:none;">{{ paginator.page }} / {{ paginator.total_pages }}</span>
+          {% if paginator.next_page %}
+            <a class="tag-btn" href="{{ paginator.next_page_path | relative_url }}">다음 →</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </div>
+    <div class="sidebar">
+      {% include author-card.html %}
+      {% include tag-cloud.html %}
+    </div>
+  </div>
+</div>

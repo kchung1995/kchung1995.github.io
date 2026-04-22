@@ -1,43 +1,91 @@
 ---
-layout: archive
+layout: default
+nav_page: tags
 ---
 
-{{ content }}
+<div class="container" style="max-width:920px;">
+  <h1 class="section-title" style="margin-bottom:28px;">태그</h1>
 
-{% assign tags_max = 0 %}
-{% for tag in site.tags %}
-  {% if tag[1].size > tags_max %}
-    {% assign tags_max = tag[1].size %}
-  {% endif %}
-{% endfor %}
+  {% assign sorted_tags = site.tags | sort %}
 
-<ul class="taxonomy__index">
-  {% for i in (1..tags_max) reversed %}
-    {% for tag in site.tags %}
-      {% if tag[1].size == i %}
-        <li>
-          <a href="#{{ tag[0] | slugify }}">
-            <strong>{{ tag[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
-          </a>
-        </li>
-      {% endif %}
+  <div class="tag-list" id="tag-list">
+    <button class="tag-btn active" data-filter="__all">
+      전체 <span class="count">{{ site.posts.size }}</span>
+    </button>
+    {% for tag in sorted_tags %}
+      {% assign tag_name = tag[0] %}
+      {% assign tag_count = tag[1] | size %}
+      <button class="tag-btn" data-filter="tag-{{ tag_name | slugify }}" id="btn-tag-{{ tag_name | slugify }}">
+        {{ tag_name }} <span class="count">{{ tag_count }}</span>
+      </button>
     {% endfor %}
-  {% endfor %}
-</ul>
+  </div>
 
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-{% for i in (1..tags_max) reversed %}
-  {% for tag in site.tags %}
-    {% if tag[1].size == i %}
-      <section id="{{ tag[0] | slugify | downcase }}" class="taxonomy__section">
-        <h2 class="archive__subtitle">{{ tag[0] }}</h2>
-        <div class="entries-{{ entries_layout }}">
-          {% for post in tag.last %}
-            {% include archive-single.html type=entries_layout %}
-          {% endfor %}
-        </div>
-        <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
-      </section>
-    {% endif %}
-  {% endfor %}
-{% endfor %}
+  <h2 class="section-subtitle" id="tag-subtitle">전체 · {{ site.posts.size }}개</h2>
+
+  <div class="post-list" id="all-posts">
+    {% for post in site.posts %}
+      <div class="tagged-post" data-tags="{% for tag in post.tags %}tag-{{ tag | slugify }} {% endfor %}">
+        {% include post-card.html post=post %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('#tag-list .tag-btn');
+  var posts = document.querySelectorAll('.tagged-post');
+  var subtitle = document.getElementById('tag-subtitle');
+
+  var tagCounts = {};
+  var tagLabels = {};
+  buttons.forEach(function (b) {
+    var f = b.getAttribute('data-filter');
+    if (f === '__all') return;
+    var count = b.querySelector('.count').textContent.trim();
+    var label = b.textContent.replace(count, '').trim();
+    tagCounts[f] = parseInt(count, 10) || 0;
+    tagLabels[f] = label;
+  });
+
+  function apply(filter) {
+    buttons.forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-filter') === filter);
+    });
+    var visible = 0;
+    posts.forEach(function (el) {
+      var tags = (el.getAttribute('data-tags') || '').trim().split(/\s+/);
+      var show = filter === '__all' || tags.indexOf(filter) !== -1;
+      el.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (filter === '__all') {
+      subtitle.textContent = '전체 · ' + visible + '개';
+    } else {
+      subtitle.innerHTML = '<span style="color:var(--accent)">' + tagLabels[filter] + '</span> · ' + visible + '개';
+    }
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      if (b.classList.contains('active') && f !== '__all') {
+        apply('__all');
+        history.replaceState(null, '', window.location.pathname);
+      } else {
+        apply(f);
+        if (f !== '__all') history.replaceState(null, '', '#' + f);
+      }
+    });
+  });
+
+  // handle hash on load (e.g., from sidebar tag cloud link)
+  if (window.location.hash) {
+    var hash = window.location.hash.slice(1);
+    if (tagCounts[hash] !== undefined) {
+      apply(hash);
+    }
+  }
+})();
+</script>

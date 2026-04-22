@@ -1,0 +1,27 @@
+{% assign author = site.author %}
+{% assign initial = author.name | default: '카' | slice: 0 %}
+{% assign github_url = '' %}
+{% if author.links %}
+  {% for l in author.links %}
+    {% if l.label == 'GitHub' %}{% assign github_url = l.url %}{% endif %}
+  {% endfor %}
+{% endif %}
+<aside class="author-card">
+  <div class="author-card-head">
+    <div class="author-avatar">
+      {% if author.avatar %}
+        <img src="{{ author.avatar | relative_url }}" alt="{{ author.name }}">
+      {% else %}
+        <span>{{ initial }}</span>
+      {% endif %}
+    </div>
+    <div>
+      <div class="author-name">{{ author.name | default: '카펀' }}</div>
+      <div class="author-handle">@{{ site.name | default: 'kchung1995' }}</div>
+    </div>
+  </div>
+  {% if author.bio %}<p class="author-bio">{{ author.bio }}</p>{% endif %}
+  {% if github_url != '' %}
+    <a class="author-link" href="{{ github_url }}" target="_blank" rel="noopener noreferrer">GitHub →</a>
+  {% endif %}
+</aside>

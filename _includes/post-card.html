@@ -1,0 +1,34 @@
+{% assign post = include.post %}
+{% assign excerpt = post.excerpt | strip_html | strip_newlines | truncate: 160 %}
+{% assign words = post.content | strip_html | number_of_words %}
+{% if words == 0 %}{% assign words = 1 %}{% endif %}
+{% assign wpm = site.words_per_minute | default: 200 %}
+{% assign reading_time = words | divided_by: wpm %}
+{% if reading_time < 1 %}{% assign reading_time = 1 %}{% endif %}
+<a class="post-card" href="{{ post.url | relative_url }}">
+  <div class="post-card-img">
+    {% if post.image %}
+      <img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}">
+    {% elsif post.header.teaser %}
+      <img src="{{ post.header.teaser | relative_url }}" alt="{{ post.title | escape }}">
+    {% else %}
+      <span class="placeholder">thumbnail</span>
+    {% endif %}
+  </div>
+  <div class="post-card-body">
+    {% if post.tags and post.tags.size > 0 %}
+      <div class="post-card-tags">
+        {% for tag in post.tags %}
+          <span class="tag-chip">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <h2 class="post-card-title">{{ post.title }}</h2>
+    <p class="post-card-excerpt">{{ excerpt }}</p>
+    <div class="post-card-meta">
+      <span>{{ post.date | date: '%Y. %-m. %-d' }}</span>
+      <span class="dot">·</span>
+      <span>{{ reading_time }}분 읽기</span>
+    </div>
+  </div>
+</a>

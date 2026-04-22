@@ -1,0 +1,16 @@
+{% assign active_tag = include.active_tag %}
+<aside class="tag-cloud">
+  <h3>태그</h3>
+  <div class="tag-cloud-list">
+    {% assign sorted_tags = site.tags | sort %}
+    {% for tag in sorted_tags %}
+      {% assign tag_name = tag[0] %}
+      {% assign tag_count = tag[1] | size %}
+      {% assign tag_slug = tag_name | slugify %}
+      <a class="tag-cloud-chip{% if active_tag == tag_name %} active{% endif %}"
+         href="{{ '/tags/' | relative_url }}#tag-{{ tag_slug }}">
+        {{ tag_name }} <span class="count">{{ tag_count }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</aside>

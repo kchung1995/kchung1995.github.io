@@ -1,42 +1,38 @@
 ---
 layout: default
+nav_page: search
 ---
 
-{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
-  {% include page__hero.html %}
-{% endif %}
-
-{% if page.url != "/" and site.breadcrumbs %}
-  {% unless paginator %}
-    {% include breadcrumbs.html %}
-  {% endunless %}
-{% endif %}
-
-<div id="main" role="main">
-  {% include sidebar.html %}
-
-  <div class="archive">
-    {% unless page.header.overlay_color or page.header.overlay_image %}
-      <h1 id="page-title" class="page__title">{{ page.title }}</h1>
-    {% endunless %}
-
-    {{ content }}
-
-    {%- assign search_provider = site.search_provider | default: "lunr" -%}
-    {%- case search_provider -%}
-      {%- when "lunr" -%}
-        <input type="text" id="search" class="search-input" placeholder="{{ site.data.ui-text[site.locale].search_placeholder_text | default: 'Enter your search term...' }}" />
-        <div id="results" class="results"></div>
-      {%- when "google" -%}
-        <form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
-        <input type="text" id="cse-search-input-box-id" class="search-input" placeholder="{{ site.data.ui-text[site.locale].search_placeholder_text | default: 'Enter your search term...' }}" />
-        </form>
-        <div id="results" class="results">
-          <gcse:searchresults-only></gcse:searchresults-only>
-        </div>
-      {%- when "algolia" -%}
-        <div class="search-searchbar"></div>
-        <div class="search-hits"></div>
-    {%- endcase -%}
+<div class="container" style="max-width:920px;">
+  <h1 class="section-title" style="margin-bottom:28px;">검색</h1>
+  <div class="search-wrap">
+    <input id="search-input" type="text" autofocus autocomplete="off" placeholder="포스트 제목, 태그로 검색...">
+    <span class="icon">🔍</span>
+  </div>
+  <div id="search-count" class="search-count" style="display:none;">
+    <strong id="search-count-num">0</strong>개의 결과
+  </div>
+  <div id="search-results" class="post-list"></div>
+  <div id="search-empty" class="search-empty">
+    <span class="emoji">✍️</span>
+    <p style="font-size:15px;margin:0;">검색어를 입력하세요</p>
   </div>
 </div>
+
+<script id="posts-json" type="application/json">
+[
+  {% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "date": {{ post.date | date: '%Y. %-m. %-d' | jsonify }},
+    "excerpt": {{ post.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }},
+    "tags": {{ post.tags | jsonify }},
+    "image": {{ post.image | default: post.header.teaser | default: '' | jsonify }},
+    "words": {{ post.content | strip_html | number_of_words }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</script>
+
+<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
