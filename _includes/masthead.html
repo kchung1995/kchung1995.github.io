@@ -9,7 +9,10 @@
       <a class="nav-link{% if nav_page == 'home' %} active{% endif %}" href="{{ '/' | relative_url }}">홈</a>
       <a class="nav-link{% if nav_page == 'tags' %} active{% endif %}" href="{{ '/tags/' | relative_url }}">태그</a>
       <a class="nav-link{% if nav_page == 'search' %} active{% endif %}" href="{{ '/search/' | relative_url }}">검색</a>
-      <a class="nav-link" href="https://medium.com/@kchung1995" target="_blank" rel="noopener noreferrer">English</a>
+      <a class="nav-link nav-link-english" href="https://medium.com/@kchung1995" target="_blank" rel="noopener noreferrer">
+        <span class="label-desktop">English</span>
+        <span class="label-mobile">Eng</span>
+      </a>
       <button class="nav-toggle" type="button" id="dark-toggle" aria-label="다크 모드 토글">🌙</button>
     </div>
   </div>
