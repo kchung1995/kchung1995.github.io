@@ -24,6 +24,9 @@
       state.dark = dark;
       writeState(state);
       render();
+      document.dispatchEvent(new CustomEvent('blog-theme-change', {
+        detail: { dark: dark }
+      }));
     });
   }
 })();

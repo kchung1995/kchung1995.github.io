@@ -3,19 +3,44 @@
 
   (function() {
     var commentContainer = document.querySelector('#utterances-comments');
+    var currentTheme = null;
 
     if (!commentContainer) {
       return;
     }
 
-    var script = document.createElement('script');
-    script.setAttribute('src', 'https://utteranc.es/client.js');
-    script.setAttribute('repo', '{{ site.repository }}');
-    script.setAttribute('issue-term', '{{ site.comments.utterances.issue_term | default: "pathname" }}');
-    {% if site.comments.utterances.label %}script.setAttribute('label', '{{ site.comments.utterances.label }}');{% endif %}
-    script.setAttribute('theme', '{{ site.comments.utterances.theme | default: "github-light" }}');
-    script.setAttribute('crossorigin', 'anonymous');
+    function resolveTheme() {
+      return document.documentElement.classList.contains('dark')
+        ? '{{ site.comments.utterances.dark_theme | default: "github-dark" }}'
+        : '{{ site.comments.utterances.theme | default: "github-light" }}';
+    }
 
-    commentContainer.appendChild(script);
+    function renderUtterances(theme) {
+      commentContainer.innerHTML = '';
+
+      var script = document.createElement('script');
+      script.setAttribute('src', 'https://utteranc.es/client.js');
+      script.setAttribute('repo', '{{ site.repository }}');
+      script.setAttribute('issue-term', '{{ site.comments.utterances.issue_term | default: "pathname" }}');
+      {% if site.comments.utterances.label %}script.setAttribute('label', '{{ site.comments.utterances.label }}');{% endif %}
+      script.setAttribute('theme', theme);
+      script.setAttribute('crossorigin', 'anonymous');
+
+      commentContainer.appendChild(script);
+      currentTheme = theme;
+    }
+
+    renderUtterances(resolveTheme());
+
+    document.addEventListener('blog-theme-change', function(event) {
+      var dark = event && event.detail ? event.detail.dark : document.documentElement.classList.contains('dark');
+      var nextTheme = dark
+        ? '{{ site.comments.utterances.dark_theme | default: "github-dark" }}'
+        : '{{ site.comments.utterances.theme | default: "github-light" }}';
+
+      if (nextTheme !== currentTheme) {
+        renderUtterances(nextTheme);
+      }
+    });
   })();
 </script>

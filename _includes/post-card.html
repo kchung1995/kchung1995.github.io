@@ -11,6 +11,8 @@
       <img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}">
     {% elsif post.header.teaser %}
       <img src="{{ post.header.teaser | relative_url }}" alt="{{ post.title | escape }}">
+    {% elsif site.teaser %}
+      <img src="{{ site.teaser | relative_url }}" alt="{{ post.title | escape }}">
     {% else %}
       <span class="placeholder">thumbnail</span>
     {% endif %}

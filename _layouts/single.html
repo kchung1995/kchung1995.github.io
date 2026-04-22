@@ -56,7 +56,7 @@ layout: default
           {{ content }}
         </div>
 
-        {% if site.comments.provider and jekyll.environment == 'production' and page.comments != false %}
+        {% if site.comments.provider and page.comments != false %}
           <section class="post-comments" style="margin-top:48px;">
             {% include comments.html %}
           </section>
