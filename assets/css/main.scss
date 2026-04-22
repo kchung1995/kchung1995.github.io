@@ -369,11 +369,25 @@ img { max-width: 100%; height: auto; }
   line-height: 1.7;
   color: var(--text-2);
 }
+.author-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-top: 4px;
+}
 .author-link {
   font-size: 12px;
   color: var(--accent);
   text-decoration: none;
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+.author-link + .author-link::before {
+  content: "|";
+  margin: 0 8px;
+  color: var(--text-3);
 }
 
 /* ------- Tag cloud (sidebar) ------- */

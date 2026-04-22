@@ -1,6 +1,7 @@
 {% assign author = site.author %}
 {% assign initial = author.name | default: '카' | slice: 0 %}
 {% assign github_url = '' %}
+{% assign linkedin_url = 'https://www.linkedin.com/in/kchung1995' %}
 {% if author.links %}
   {% for l in author.links %}
     {% if l.label == 'GitHub' %}{% assign github_url = l.url %}{% endif %}
@@ -21,7 +22,11 @@
     </div>
   </div>
   {% if author.bio %}<p class="author-bio">{{ author.bio }}</p>{% endif %}
-  {% if github_url != '' %}
-    <a class="author-link" href="{{ github_url }}" target="_blank" rel="noopener noreferrer">GitHub →</a>
-  {% endif %}
+  <div class="author-links">
+    {% if github_url != '' %}
+      <a class="author-link" href="{{ github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+    {% endif %}
+    <a class="author-link" href="{{ linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a class="author-link" href="{{ '/about/' | relative_url }}">About</a>
+  </div>
 </aside>
