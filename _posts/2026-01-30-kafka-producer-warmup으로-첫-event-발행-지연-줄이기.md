@@ -2,6 +2,7 @@
 categories: posts
 data: 2026-12-30 22:00
 tags: [카프카, 스프링]
+image: /assets/images/posts/2026-01-30-kafka-producer-warmup으로-첫-event-발행-지연-줄이기/send-send.png
 
 ---
 
