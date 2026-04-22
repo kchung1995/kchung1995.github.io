@@ -157,8 +157,7 @@ img { max-width: 100%; height: auto; }
 }
 .nav-link:hover { color: #fff; text-decoration: none; }
 .nav-link.active { font-weight: 600; color: #fff; }
-.nav-link-english .label-desktop { display: inline !important; }
-.nav-link-english .label-mobile { display: none !important; }
+.nav-link-english::before { content: "English"; }
 .nav-toggle {
   margin-left: 8px;
   background: none;
@@ -916,8 +915,7 @@ img { max-width: 100%; height: auto; }
     gap: 0;
   }
   .nav-link { padding: 6px 8px; font-size: 13px; }
-  .nav-link-english .label-desktop { display: none !important; }
-  .nav-link-english .label-mobile { display: inline !important; }
+  .nav-link-english::before { content: "Eng"; }
   .nav-toggle {
     margin-left: 4px;
     padding: 6px;
