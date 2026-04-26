@@ -3,22 +3,73 @@
 
   (function () {
     var commentContainer = document.querySelector('#giscus-comments');
+    var currentTheme = null;
 
     if (!commentContainer) {
       return;
     }
 
-    var script = document.createElement('script');
-    script.setAttribute('src', 'https://giscus.app/client.js');
-    script.setAttribute('data-repo', '{{ site.repository | downcase }}');
-    script.setAttribute('data-repo-id', '{{ site.comments.giscus.repo_id }}');
-    script.setAttribute('data-category', '{{ site.comments.giscus.category_name }}');
-    script.setAttribute('data-category-id', '{{ site.comments.giscus.category_id }}');
-    script.setAttribute('data-mapping', '{{ site.comments.giscus.discussion_term | default: "pathname" }}');
-    script.setAttribute('data-reactions-enabled', '{{ site.comments.giscus.reactions_enabled | default: 1 }}');
-    script.setAttribute('data-theme', '{{ site.comments.giscus.theme | default: "light" }}');
-    script.setAttribute('crossorigin', 'anonymous');
+    function resolveTheme(dark) {
+      var isDark = typeof dark === 'boolean'
+        ? dark
+        : document.documentElement.classList.contains('dark');
 
-    commentContainer.appendChild(script);
+      return isDark
+        ? '{{ site.comments.giscus.dark_theme | default: "dark" }}'
+        : '{{ site.comments.giscus.theme | default: "light" }}';
+    }
+
+    function renderGiscus(theme) {
+      commentContainer.innerHTML = '';
+
+      var script = document.createElement('script');
+      script.setAttribute('src', 'https://giscus.app/client.js');
+      script.setAttribute('data-repo', '{{ site.repository | downcase }}');
+      script.setAttribute('data-repo-id', '{{ site.comments.giscus.repo_id }}');
+      {% if site.comments.giscus.category_name %}script.setAttribute('data-category', '{{ site.comments.giscus.category_name }}');{% endif %}
+      script.setAttribute('data-category-id', '{{ site.comments.giscus.category_id }}');
+      script.setAttribute('data-mapping', '{{ site.comments.giscus.discussion_term | default: "pathname" }}');
+      script.setAttribute('data-strict', '{{ site.comments.giscus.strict | default: 0 }}');
+      script.setAttribute('data-reactions-enabled', '{{ site.comments.giscus.reactions_enabled | default: 1 }}');
+      script.setAttribute('data-emit-metadata', '{{ site.comments.giscus.emit_metadata | default: 0 }}');
+      script.setAttribute('data-input-position', '{{ site.comments.giscus.input_position | default: "bottom" }}');
+      script.setAttribute('data-theme', theme);
+      script.setAttribute('data-lang', '{{ site.comments.giscus.lang | default: "en" }}');
+      script.setAttribute('crossorigin', 'anonymous');
+      script.setAttribute('async', '');
+
+      commentContainer.appendChild(script);
+      currentTheme = theme;
+    }
+
+    function setGiscusTheme(theme) {
+      var iframe = commentContainer.querySelector('iframe.giscus-frame');
+
+      if (!iframe || !iframe.contentWindow) {
+        renderGiscus(theme);
+        return;
+      }
+
+      iframe.contentWindow.postMessage({
+        giscus: {
+          setConfig: {
+            theme: theme
+          }
+        }
+      }, 'https://giscus.app');
+
+      currentTheme = theme;
+    }
+
+    renderGiscus(resolveTheme());
+
+    document.addEventListener('blog-theme-change', function (event) {
+      var dark = event && event.detail ? event.detail.dark : undefined;
+      var nextTheme = resolveTheme(dark);
+
+      if (nextTheme !== currentTheme) {
+        setGiscusTheme(nextTheme);
+      }
+    });
   })();
 </script>
