@@ -219,15 +219,15 @@ kafka의 `send()`와 비교해서, `partitionsFor()`의 역할과 과정에 대�
 ```java
 // org.springframework.kafka.core.KafkaTemplate
 @Override
-	public List<PartitionInfo> partitionsFor(String topic) {
-		Producer<K, V> producer = getTheProducer();
-		try {
-			return producer.partitionsFor(topic);
-		}
-		finally {
-			closeProducer(producer, inTransaction());
-		}
-	}
+public List<PartitionInfo> partitionsFor(String topic) {
+  Producer<K, V> producer = getTheProducer();
+  try {
+    return producer.partitionsFor(topic);
+  }
+  finally {
+    closeProducer(producer, inTransaction());
+  }
+}
 ```
 
 우선, `getTheProducer()`를 통해 producer 정보를 가져온다. 이 때 `topic`은 넘기지 않는다.
@@ -239,7 +239,7 @@ kafka의 `send()`와 비교해서, `partitionsFor()`의 역할과 과정에 대�
 ```java
 // org.springframework.kafka.core.KafkaTemplate
 protected Producer<K, V> getTheProducer(@SuppressWarnings("unused") @Nullable String topic) {
-	 return this.producerFactory.createProducer();
+  return this.producerFactory.createProducer();
 }
 ```
 
@@ -279,8 +279,8 @@ focus로 주석 처리한 곳의 동작 방식은 아래와 같다.
 // org.springframework.kafka.core.KafkaTemplate
 @Override
 public CompletableFuture<SendResult<K, V>> send(String topic, @Nullable V data) {
-		ProducerRecord<K, V> producerRecord = new ProducerRecord<>(topic, data);
-		return observeSend(producerRecord);
+  ProducerRecord<K, V> producerRecord = new ProducerRecord<>(topic, data);
+  return observeSend(producerRecord);
 }
 ```
 
