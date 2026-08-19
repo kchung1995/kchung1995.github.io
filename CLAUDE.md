@@ -1,1 +1,1 @@
-Always refer to contents in @AGENTS.md
+AGENTS.md
